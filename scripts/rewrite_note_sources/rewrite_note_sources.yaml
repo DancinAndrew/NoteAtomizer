@@ -1,0 +1,11 @@
+# rewrite_note_sources.py 使用
+# 長文從 03_Resources 搬到 06_finish 後，執行一次以修正原子筆記的 source 連結。
+
+exact: []
+
+# 若來源曾用「相對路徑」寫 source，搬資料夾時可改前綴（範例）
+# prefix_in_link:
+#   - from: "03_Resources/backend/"
+#     to: "06_finish/backend/"
+
+prefix_in_link: []

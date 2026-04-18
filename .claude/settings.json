@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(git remote *)",
+      "Bash(chmod +x /Users/andrew-ideaslab/Documents/Project/NoteAtomizer/scripts/init/init_vault.sh /Users/andrew-ideaslab/Documents/Project/NoteAtomizer/scripts/init/init_areas.sh)",
+      "Bash(mkdir -p /tmp/test_vault)",
+      "Bash(python3 -c ' *)",
+      "Bash(bash scripts/init/init_vault.sh)",
+      "Bash(printf '01_Machine_Learning\\\\n02_Software_Engineering\\\\n03_System_Design\\\\n')",
+      "Bash(bash scripts/init/init_areas.sh)",
+      "Bash(rm -rf /tmp/test_vault)"
+    ],
+    "additionalDirectories": [
+      "/Users/andrew-ideaslab/Documents/Project/NoteAtomizer/scripts"
+    ]
+  }
+}

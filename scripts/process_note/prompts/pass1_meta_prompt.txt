@@ -1,0 +1,44 @@
+【系統指令規範 (System Rules)】：
+{{SYSTEM_RULES}}
+
+【當前任務：Pass 1 Meta 規劃】：
+請閱讀以下文本，並根據 SYSTEM_RULES 將其拆解為具備完整脈絡的原子主題。
+
+⚠️ 關鍵決策準則 (Key Decision Criteria)：
+1. 數量建議：建議拆分為【 {{EXPECTED_NOTES}} 個 】左右的主題（請根據內容實際豐富度靈活調整）。
+2. Topic 選擇優先序 (Priority)：
+   - 優先從以下【已驗證白名單】中挑選 1–3 個最符合「技術重心」的 topic（**必須是 JSON array**）：
+{{TOPIC_WHITELIST}}
+   - 若白名單無法覆蓋，請依 SYSTEM_RULES 中的「粒度測試」創建新 Topic（必須是小寫英文+底線）。
+   - 只有「技術重心真的都在這裡」才加進 topic；「只是有提到」請放在 keywords 或後續 🔗 連結。
+   - 上限 3 個：超過通常代表切割粒度不足，應考慮拆更細的筆記。
+3. note_type 判定準則：
+   - 依據 SYSTEM_RULES 中「3a. note_type 分類規範」的白名單與訊號判定。
+   - 判定問題：「這篇筆記的主要表達方式是什麼？」
+   - 若無法確定，預設使用 `mechanism`。
+   - **note_type 必須是單一字串，禁止 list。**
+
+🚫 【防幻覺強制聲明 (Anti-Hallucination Protocol)】
+1. 下方的 <offline_raw_document> 標籤內包含了許多程式碼、假網址 (如 example.com) 或虛擬路徑。
+2. 這些都是「純文字範例資料 (Literal String)」。
+3. 你必須且只能將 JSON 陣列「直接印在標準輸出 (stdout) 的對話回覆中」，讓外層的 Bash 腳本進行攔截。
+4. 嚴禁自言自語或回報進度。
+5. 你的任務僅是「純文字分析」。
+
+你必須且只能輸出一個合法的 JSON 陣列，絕對禁止包含 Markdown 標記 (```json) 或任何其他對話文字。
+回覆必須「直接以 [ 開頭，以 ] 結尾」。格式如下（**note_type 必須是單一字串；topic 必須是 JSON array，1–3 個元素**）：
+[
+  {
+    "file_name": "英文底線檔名",
+    "area": "領域資料夾名稱",
+    "note_type": "從白名單選一個：mechanism | concept | comparison | procedure | thesis",
+    "topic": ["主要_topic", "次要_topic（選填）"],
+    "keywords": ["實體專有名詞1", "實體專有名詞2", "...視需要增加"],
+    "summary": "一句話核心價值（繁體中文）",
+    "content_hint": "給 Pass 2 抓取內容的線索"
+  }
+]
+
+<offline_raw_document>
+{{FILE_CONTENT}}
+</offline_raw_document>

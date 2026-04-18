@@ -1,0 +1,114 @@
+# ==============================================================================
+# Pipeline 全域設定
+# 修改這裡即可一次調整所有腳本的模型、路徑與冷卻參數。
+#
+# 啟動：所有管線腳本（process_note.sh、process_course.sh、
+#        build_keyword_mocs.py、rewrite_note_sources.py）
+#        都會自動讀取此檔案。
+# ==============================================================================
+
+# Vault 根目錄絕對路徑。
+# 留空 ("") 則由各腳本從此設定檔位置向上兩層推導（scripts/ → vault root）。
+vault_root: "/Users/andrew-ideaslab/Documents/Obsidian"
+
+# ------------------------------------------------------------------------------
+# LLM 供應商選擇（全域預設；各管線可在下方用 provider: 覆寫）
+# 可選值: "gemini" | "claude"
+# ------------------------------------------------------------------------------
+llm:
+  provider: "gemini"
+
+# ------------------------------------------------------------------------------
+# Gemini CLI 設定
+# ------------------------------------------------------------------------------
+gemini:
+  # Gemini CLI 執行檔位置。
+  # 留空則依序嘗試 /opt/homebrew/bin/gemini、/usr/local/bin/gemini、PATH
+  bin: "/opt/homebrew/bin/gemini"
+
+  # 全管線預設模型；各管線可在下方用 model: 覆寫。
+  model: "gemini-3.1-pro-preview"
+
+  # 主模型失敗（429/容量不足）時自動切換的備援模型
+  fallback_model: "gemini-2.5-pro"
+
+# ------------------------------------------------------------------------------
+# Claude Code 設定
+# ------------------------------------------------------------------------------
+claude:
+  # Claude Code CLI 執行檔位置。
+  # 留空則依序嘗試 /opt/homebrew/bin/claude、/usr/local/bin/claude、PATH
+  bin: ""
+
+  # 全管線預設模型
+  model: "claude-opus-4-7"
+
+  # 備援模型（留空表示不啟用）
+  fallback_model: "claude-sonnet-4-6"
+
+  # 傳給 Claude Code CLI 的額外旗標（空白分隔）
+  extra_flags: "--max-turns 1"
+
+# ------------------------------------------------------------------------------
+# 長文原子化管線 (process_note.sh)
+# ------------------------------------------------------------------------------
+process_note:
+  # 覆寫全域 LLM 供應商（留空繼承 llm.provider）
+  # provider: ""
+
+  # 覆寫全域模型（留空則繼承 <provider>.model）
+  model: ""
+
+  # Pass 1 結束後冷卻秒數（避免 API 限流）
+  cooldown_after_pass1: 30
+
+  # Pass 2 每篇之間冷卻秒數
+  cooldown_between_pass2: 10
+
+# ------------------------------------------------------------------------------
+# 課程筆記管線 (process_course.sh)
+# ------------------------------------------------------------------------------
+course_note:
+  # 覆寫全域 LLM 供應商（留空繼承 llm.provider）
+  # provider: ""
+
+  # 覆寫全域模型（留空則繼承 <provider>.model）
+  model: ""
+
+  # Step 1 結束後冷卻秒數
+  cooldown_after_step1: 60
+
+  # Step 2 每段之間冷卻秒數
+  cooldown_between_step2: 60
+
+  # API 錯誤後重試等待秒數
+  retry_cooldown: 90
+
+# ------------------------------------------------------------------------------
+# Keyword MOC 管線 (build_keyword_mocs.py)
+# ------------------------------------------------------------------------------
+keyword_moc:
+  # 覆寫全域 LLM 供應商（留空繼承 llm.provider）
+  # provider: ""
+
+  # 覆寫全域模型（留空則繼承 <provider>.model）
+  model: ""
+
+  # MOC 輸出目錄（相對於 vault_root）
+  output_dir: "02_Areas/00_MOC_MAP"
+
+  # 掃描哪些目錄收集 keywords frontmatter（相對於 vault_root）
+  scan_roots:
+    - "02_Areas"
+
+  # 路徑中含以下字串的筆記會被略過
+  exclude_path_substrings:
+    - ".obsidian"
+    - "03_Resources/Books"
+
+# ------------------------------------------------------------------------------
+# Source 連結修正工具 (rewrite_note_sources.py)
+# ------------------------------------------------------------------------------
+rewrite_note_sources:
+  # 連結替換規則檔路徑（相對於 vault_root）
+  rules_file: "scripts/rewrite_note_sources/rewrite_note_sources.yaml"

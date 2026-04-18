@@ -1,0 +1,15 @@
+# 在下方列出你要在 02_Areas/ 建立的領域資料夾。
+# 規則：
+#   - 每行一個領域名稱
+#   - 建議採 NN_Name 格式（例：01_Machine_Learning）
+#   - 以 # 開頭的行會被忽略
+#   - 空行會被忽略
+#   - 會自動在每個領域下建立 Content/ 子資料夾
+#
+# 填寫範例（把 # 拿掉即可生效）：
+# 01_Machine_Learning
+# 02_Software_Engineering
+# 03_System_Design
+01_Machine_Learning
+02_Software_Engineering
+03_System_Design

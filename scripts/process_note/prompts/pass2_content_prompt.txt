@@ -1,0 +1,41 @@
+【系統指令規範 (System Rules)】：
+{{SYSTEM_RULES}}
+
+【當前任務：Pass 2 內容萃取】
+請針對以下文本中關於「{{CONTENT_HINT}}」的部分進行深度萃取。
+
+🚫【強制規範】：
+1. 你的輸出必須僅包含 Markdown 文本，並且「強制直接以 `---` 開頭」。
+2. 嚴禁任何對話廢話、嚴禁宣告存檔路徑。
+3. YAML 屬性強制注入 - 你的 YAML frontmatter 必須包含以下欄位（精確複製格式）：
+   up: [[MOC_{{AREA}}]]
+   source: "[[{{SOURCE_REL_PATH}}]]"
+   note_type: "{{NOTE_TYPE}}"
+   topic:
+{{TOPIC_YAML}}
+   keywords:
+{{KEYWORDS_YAML}}
+   summary: "{{SUMMARY}}"
+   以上 block 中 source 為來源檔之 Vault 相對路徑，禁止改寫為標題簡寫或佔位字；
+   **topic 底下只能保留上方注入的項目，禁止自行增列或刪減。**
+   **note_type 必須是上方注入的單一字串，禁止改寫或添加為 list。**
+4. ⚠️ 技術細節必須 100% 保留所有程式碼、公式與架構描述（不因 note_type 而省略）。
+5. 🈲 summary 欄位必須使用**繁體中文**，嚴禁英文。
+6. 🈲 你的輸出「只能有一個完整的 Markdown 文件」。嚴禁在同一個回覆裡輸出兩個 `---` YAML frontmatter。
+
+📐【Body 模板（note_type: {{NOTE_TYPE}}，極度重要）】：
+你必須且只能使用以下 body 模板，**嚴禁修改 section 標題，嚴禁混入其他 note_type 的章節**：
+
+{{BODY_TEMPLATE}}
+
+🔗【關聯網絡 (極度重要)】：
+在「相關知識連結」區塊中，你只能從以下清單挑選檔案進行 `[[連結]]`：
+【現有知識庫節點與摘要】：
+{{EXISTING_NOTES_CONTEXT}}
+
+【本次同批次解構的其他筆記檔名】：
+{{BATCH_FILES}}
+
+<offline_raw_document>
+{{FILE_CONTENT}}
+</offline_raw_document>

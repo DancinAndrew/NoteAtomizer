@@ -156,6 +156,16 @@ bash scripts/init/init_areas.sh
 
 ![Keyword MOC 結果](images/keywordMOC_Result.png)
 
+### `process_course.sh`：課程筆記流程
+
+執行過程（逐段萃取課程內容）：
+
+![process_course 執行過程](images/processcourse_Process.png)
+
+執行完成後，Obsidian 生成的課程筆記結果：
+
+![process_course 結果](images/processcourse_Result.png)
+
 ### 脫水後的原子筆記範例
 
 `process_note.sh` 跑完後實際產出的筆記，見 [Demo(Process_note)/](<Demo(Process_note)/>)，裡面包含三篇由長文脫水出來的原子筆記（YAML frontmatter、摘要、情境問題均已填入）。
